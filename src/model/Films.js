@@ -176,7 +176,7 @@ export default class Films {
 
     text += ` group by f.code`;
     const having = [];
-    if (rental) having.push(`(DATE(MAX(s."date")) > DATE(NOW()) AND DATE(NOW()) >= DATE(MIN(s."date")))`);
+    if (rental) having.push(`(DATE(MAX(s."date")) >= DATE(NOW()) AND DATE(NOW()) >= DATE(MIN(s."date")))`);
     if (soon) having.push(`(DATE(MIN(s."date")) > DATE(NOW()) OR MIN(s."date") IS NULL)`);
     text += having.length ? ` HAVING ${having.join(' OR ')}` : '';
     text += ` order by code desc`;
